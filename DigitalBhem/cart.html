@@ -1,0 +1,294 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/9ced335584.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <title>Hikee Store</title>
+
+
+    <style>
+
+a{
+    text-decoration: none;
+}
+.header{
+    height: 80px;
+    width: 70%;
+    background-color: goldenrod;
+    border-radius: 3px;
+    margin: 30px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+}
+.header .logo{
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+.container{
+    display: flex;
+    width: 70%;
+    margin-bottom: 30px;
+    background-color: white;
+}
+#root{
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+.sidebar{
+    width: 40%;
+    border-radius: 5px;
+    background-color: white;
+    margin-left: 20px;
+    padding: 15px;
+    text-align: center;
+}
+.head{
+    background-color:#0e0e1d;
+    border-radius: 3px;
+    height: 40px;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+.foot{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0px;
+    padding: 10px 0px;
+    border-top: 1px solid #333;
+}
+.box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 15px;
+}
+.img-box{
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.images{
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: cover;
+    object-position: center;
+}
+.bottom{
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 110px;
+}
+h2{
+    font-size: 20px;
+    color: red;
+}
+button{
+    width: 100%;
+    position: relative;
+    border: none;
+    border-radius: 5px;
+    background-color: goldenrod;
+    padding: 7px 25px;
+    cursor: pointer;
+    color: white;
+}
+button:hover{
+    background-color: #333;
+}
+.cart-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: white;
+    border-bottom: 1px solid #aaa;
+    border-radius: 3px;
+    margin: 10px 10px;
+}
+.row-img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid goldenrod;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rowimg{
+    max-width: 43px;
+    max-height: 43px;
+    border-radius: 50%;
+}
+.fa-trash:hover{
+    cursor: pointer;
+    color: #333;}
+
+    </style>
+</head>
+
+<body>
+    <nav id="nav">
+        <div class="navTop">
+            <div class="navItem">
+                <h1>NikeCart</h1>
+                <!-- <img src="./img/sneakers.png" alt=""> -->
+            </div>
+            <div class="navItem">
+                <div class="search">
+                    <input type="text" id="searchInput" placeholder="Search...">
+                    <button id="searchButton">Search</button>
+                  </div>
+                  <ul id="searchResults"></ul>
+                
+            </div>
+            <div class="navItem">
+                <div class="cart"><i class="fa-solid fa-cart-shopping fa-bounce fa-2xl" style="color: #fff;"></i><p id="count">0</p>
+                    <!-- <div id="cartItem"></div>
+                    <div id="total"></div> -->
+                </div>
+            </div>
+        </div>
+        <div class="navBottom">
+          <a href="index.html"> <h3 class="menuItem">AIR FORCE</h3></a> 
+            <a href="index.html">  <h3 class="menuItem">JORDAN</h3></a> 
+            <a href="index.html">  <h3 class="menuItem">BLAZER</h3></a> 
+            <a href="index.html">  <h3 class="menuItem">CRATER</h3></a> 
+            <a href="index.html">  <h3 class="menuItem">HIPPIE</h3></a> 
+        </div>
+    </nav>
+  
+    <div class="container">
+        <div id="root"></div>
+        <div class="sidebar">
+            <div class="head"><p>My Cart</p></div>
+            <div id="cartItem">Your cart is empty</div>
+            <div class="foot">
+                <h3>Total</h3>
+                <h2 id="total">Rs 0.00</h2>
+            </div>
+        </div>
+    </div>
+<script>
+
+const product = [
+    {
+        id: 0,
+        image: './img/pngwing2.png',
+        title: 'AIR FORCE',
+        price: 10020,
+    },
+    {
+        id: 1,
+        image: './img/pngwing.com.png',
+        title: 'JORDAN',
+        price: 80000,
+    },
+    {
+        id: 2,
+        image: './img/pngwing3.png',
+        title: 'BLAZER',
+        price: 8030,
+    },
+    {
+        id: 3,
+        image: './img/pngwing4.png',
+        title: 'CRATER',
+        price: 9000,
+    },
+    {
+        id: 4,
+        image: './img/pngwing5.png',
+        title: 'HIPPIE',
+        price: 12000,
+    }
+];
+const categories = [...new Set(product.map((item)=>
+    {return item}))]
+    let i=0;
+document.getElementById('root').innerHTML = categories.map((item)=>
+{
+    var {image, title, price} = item;
+    return(
+        `<div class='box'>
+            <div class='img-box'>
+                <img class='images' src=${image}></img>
+            </div>
+        <div class='bottom'>
+        <p>${title}</p>
+        <h2>Rs ${price}.00</h2>`+
+        "<button onclick='addtocart("+(i++)+")'>Add to cart</button>"+
+        `</div>
+        </div>`
+    )
+}).join('')
+
+
+
+function addtocart(a)
+{
+    cart.push({...categories[a]});
+    displaycart();
+}
+function delElement(a){
+    cart.splice(a, 1);
+    displaycart();
+}
+
+var cart =[];
+
+function displaycart(){
+    let j = 0, total=0;
+    document.getElementById("count").innerHTML=cart.length;
+    if(cart.length==0){
+        document.getElementById('cartItem').innerHTML = "Your cart is empty";
+        document.getElementById("total").innerHTML = "Rs "+0+".00";
+    }
+    else{
+        document.getElementById("cartItem").innerHTML = cart.map((items)=>
+        {
+            var {image, title, price} = items;
+            total=total+price;
+            document.getElementById("total").innerHTML = "Rs"+total+".00";
+            return(
+                `<div class='cart-item'>
+                <div class='row-img'>
+                    <img class='rowimg' src=${image}>
+                </div>
+                <p style='font-size:12px;'>${title}</p>
+                <h2 style='font-size: 15px;'>Rs ${price}.00</h2>`+
+                "<i class='fa-solid fa-trash' onclick='delElement("+ (j++) +")'></i></div>"
+            );
+        }).join('');
+    }
+
+
+    
+}
+
+
+</script>
+</body>
+</html>
